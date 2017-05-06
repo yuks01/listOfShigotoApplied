@@ -1,0 +1,65 @@
+<div id="add" class="modal">
+			    <div class="modal-content">
+			      <h4 id="modalTitle">Add</h4>
+					<div class="row">
+					    <form class="col s12">
+					      <div class="row">
+					        <div class="input-field col s6">
+					          <input ng-model="companyName" id="companyName" type="text" class="validate">
+					          <label for="companyName">Company Name</label>
+					        </div>
+					        <div class="input-field col s6">
+					          <input ng-model="position" id="position" type="text" class="validate">
+					          <label for="position">Position</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <textarea ng-model="details" id="details" class="materialize-textarea"></textarea>
+					          <label for="details">Details</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <label for="dateApplied">Date Applied {{dateApplied}}</label>
+					          <input ng-model="dateApplied" id="dateApplied" type="text" class="validate">
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <textarea ng-model="coverletter" id="coverletter" class="materialize-textarea"></textarea>
+					          <label for="coverletter">Cover Letter</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input ng-model="appliedLink" id="appliedLink" type="text" class="validate">
+					          <label for="appliedLink">Website Applied Link {{appliedLink}}</label>
+					        </div>
+					      </div>
+					      <div class="row" id="dateContactedField">
+					        <div class="input-field col s12">
+					          <input ng-model="dateContacted" id="dateContacted" type="text" class="validate">
+					          <label for="dateContacted">dateContacted {{dateContacted}}</label>
+					        </div>
+					      </div>
+					      <div class="row" id="emailLinkField">
+					        <div class="input-field col s12">
+					          <input ng-model="emailLink" id="emailLink" type="text" class="validate">
+					          <label for="emailLink">emailLink {{emailLink}}</label>
+					        </div>
+					      </div>
+					      <div class="row" id="dateofInterviewField">
+					        <div class="input-field col s12">
+					          <input ng-model="dateofInterview" id="dateofInterview" type="text" class="validate">
+					          <label for="dateofInterview">dateofInterview {{dateofInterview}}</label>
+					        </div>
+					      </div>
+					    </form>
+					  </div>
+			    </div>
+			    <div class="modal-footer">
+			      <a id="addShigotoBtn" ng-click="addAppliedShigoto()" class=" modal-action modal-close waves-effect waves-teal btn-flat"><i class="material-icons">add</i>Add</a>
+			      <a id="updateShigotoBtn" ng-click="updateAppliedShigoto()" class=" modal-action modal-close waves-effect waves-teal btn-flat"><i class="material-icons">edit</i>Edit</a>
+			    </div>
+			  </div> <!-- end Add Shigoto Modal -->

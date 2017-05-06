@@ -1,0 +1,16 @@
+<div class="valign-wrapper">
+
+<form role="form" name="form1" class="center-align ">
+  <div class="input-field">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="text"  class="form-control" ng-model="user.username" required>
+  </div>
+  <div class="input-field">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" id="exampleInputPassword1" class="form-control" ng-model="user.password" required>
+  </div>
+  <button class="btn btn-default" type="submit" ng-click="login(user)" ng-disabled="form1.$invalid">Submit</button>
+  <p>{{msgtxt}}</p>
+</form>
+
+</div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <title>Database of applied positions</title>
+     
+    <!-- include material design CSS -->
+    <link rel="stylesheet" href="css/materialize/css/materialize.css" />
+     
+    <!-- include material design icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+     <link href="css/layout.css" rel="stylesheet"/>
+</head>
+<body ng-app = "myApp">
+
+	<nav class="blue" ng-controller = "homeCtrl">
+		<div class="nav-wrapper row">
+		  <a href="#" class="brand-logo">Applied Shigoto</a>
+		  <a href="#" data-activates="mobile-screen" class="button-collapse"><i class="material-icons">menu</i></a>
+		  <ul class="right hide-on-med-and-down">
+		    <li><a href="#!home"><i class="material-icons left">home</i>View</a></li>      
+		    <li><a href="#!add" class="addModal"><i class="material-icons left">add</i>Add</a></li>
+		    <li><a href="" ng-click = "logout()">Log Out</a></li>
+		  </ul>
+		  <ul class="side-nav" id="mobile-screen">
+		    <li><a href="#!home"><i class="material-icons">home</i>View</a></li>      
+		    <li><a href="#!add" class="addModal"><i class="addModal material-icons">add</i>Add</a></li>
+		    <li><a href="" ng-click = "logout()">Log Out</a></li>
+		  </ul>
+		</div>
+	</nav>
+
+	
+<div ng-view></div>
+
+
+<!-- include jquery -->
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+ 
+<!-- material design js -->
+<script src="css/materialize/js/materialize.min.js"></script>
+ 
+<!-- include angular js -->
+<script src="js/angular.min.js"></script>
+
+<script src = "js/angular-route.min.js"></script>
+<script src="js/initializeMaterialize.js"></script>
+<script src="js/angularApp.js"></script>
+ 
+</body>
+</html>

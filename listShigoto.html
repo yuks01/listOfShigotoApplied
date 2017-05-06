@@ -1,0 +1,122 @@
+
+
+<div class="container">
+	    <div class="row">
+	        <div class="col s12">
+	            <h4>Shigoto Applied</h4>
+	            <div>
+				            <!-- used for searching the current list -->
+					<input type="text" ng-model="search" class="form-control" placeholder="Search product..." />
+					 
+					<!-- table that shows product record list -->
+					<table class="hoverable bordered">
+					 
+					    <thead>
+					        <tr>
+					            <th class="text-align-center">Company Name</th>
+					            <th class="text-align-center">Position</th>
+					            <th class="text-align-center">Details</th>
+					            <th class="text-align-center">Cover letter</th>
+					            <th class="text-align-center">Applied Link</th>
+					            <th class="text-align-center">Date Applied</th>
+					            <th class="text-align-center">Date Contacted</th>
+					            <th class="text-align-center">Email Link</th>
+					            <th class="text-align-center">Date of Interview</th>
+					        </tr>
+					    </thead>
+					 
+					    <tbody ng-init="getAll()">
+					        <tr ng-repeat="shigoto in shigotos | filter: search | orderBy: 'id'">
+					            <td class="text-align-center">{{ shigoto.id }}</td>
+					            <td class="text-align-center">{{ shigoto.companyName }}</td>
+					            <td class="text-align-center">{{ shigoto.position }}</td>
+					            <td class="text-align-center">{{ shigoto.details }}</td>
+					            <td class="text-align-center">{{ shigoto.coverletter}}</td>
+					            <td class="text-align-center">{{ shigoto.appliedLink}}</td>
+					            <td class="text-align-center">{{ shigoto.dateApplied}}</td>
+					            <td class="text-align-center">{{ shigoto.dateContacted}}</td>
+					            <td class="text-align-center">{{ shigoto.emailLink}}</td>
+					            <td class="text-align-center">{{ shigoto.dateofInterview}}</td>
+					            <td>
+					                <a ng-click="editOne(shigoto.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">edit</i>Edit</a>
+					                <a ng-click="deleteOne(shigoto.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">delete</i>Delete</a>
+					            </td>
+					        </tr>
+					    </tbody>
+					</table>
+				</div>
+	        </div> <!-- end col s12 -->
+	    </div> <!-- end row -->
+	</div> <!-- end container -->
+
+
+	<div id="edit" class="modal" >
+			    <div class="modal-content">
+			      <h4 id="modalTitle">Add</h4>
+					<div class="row">
+					    <form class="col s12">
+					      <div class="row">
+					        <div class="input-field col s6">
+					          <input ng-model="dataOfOne.companyName" id="companyName" type="text" class="validate">
+					          <label for="companyName">Company Name</label>
+					        </div>
+					        <div class="input-field col s6">
+					          <input ng-model="dataOfOne.position" id="position" type="text" class="validate">
+					          <label for="position">Position</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <textarea ng-model="dataOfOne.details" id="details" class="materialize-textarea"></textarea>
+					          <label for="details">Details</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input ng-model="dataOfOne.dateApplied" id="dateApplied" type="text" class="validate">
+					          <label for="dateApplied">Date Applied {{dateApplied}}</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <textarea ng-model="dataOfOne.coverletter" id="coverletter" class="materialize-textarea"></textarea>
+					          <label for="coverletter">Cover Letter</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input ng-model="dataOfOne.appliedLink" id="appliedLink" type="text" class="validate">
+					          <label for="appliedLink">Website Applied Link {{appliedLink}}</label>
+					        </div>
+					      </div>
+					      <div class="row" id="dateContactedField">
+					        <div class="input-field col s12">
+					          <input ng-model="dataOfOne.dateContacted" id="dateContacted" type="text" class="validate">
+					          <label for="dateContacted">dateContacted {{dateContacted}}</label>
+					        </div>
+					      </div>
+					      <div class="row" id="emailLinkField">
+					        <div class="input-field col s12">
+					          <input ng-model="dataOfOne.emailLink" id="emailLink" type="text" class="validate">
+					          <label for="emailLink">emailLink {{emailLink}}</label>
+					        </div>
+					      </div>
+					      <div class="row" id="dateofInterviewField">
+					        <div class="input-field col s12">
+					          <input ng-model="dataOfOne.dateofInterview" id="dateofInterview" type="text" class="validate">
+					          <label for="dateofInterview">dateofInterview {{dateofInterview}}</label>
+					        </div>
+					      </div>
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <textarea ng-model="dataOfOne.comment" id="comment" class="materialize-textarea"></textarea>
+					          <label for="comment">Comment</label>
+					        </div>
+					      </div>
+					    </form>
+					  </div>
+			    </div>
+			    <div class="modal-footer">
+			      <a id="addShigotoBtn" ng-click="editAppliedShigoto()" class=" modal-action modal-close waves-effect waves-teal btn-flat"><i class="material-icons">add</i>Add</a>
+			    </div>
+			  </div> <!-- end Add Shigoto Modal -->
