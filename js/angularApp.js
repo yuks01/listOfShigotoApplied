@@ -14,6 +14,13 @@ app.config(function($routeProvider, $locationProvider) {
 			templateUrl: 'addShigoto.html',
 			controller: 'AppliedShigotoCtrl'
 		})
+		.when ('/register', {
+			templateUrl: 'register.html',
+			controller: 'registerCtrl'
+		})
+		.when ('/logout', {
+			controller: 'loginCtrl'
+		})
 		.otherwise({redirectTo:'/home'});
 });
 
@@ -30,6 +37,7 @@ app.controller('AppliedShigotoCtrl', ['$scope', '$http', 'ShigotoData', function
 
 	$scope.addAppliedShigoto = function(){
 		$http.post('addshigotoPost.php',{
+		'title' : $scope.title,
 		'companyName' : $scope.companyName,
 		'position' : $scope.position,
 		'details' : $scope.details,
@@ -47,7 +55,7 @@ app.controller('AppliedShigotoCtrl', ['$scope', '$http', 'ShigotoData', function
 }]);
 
 
-app.controller('readData', ['$scope', '$http', 'ShigotoData', function($scope, $http, ShigotoData){
+app.controller('readData', ['$scope', '$http', 'ShigotoData', 'homeService', function($scope, $http, ShigotoData,homeService){
 	$('nav').removeClass('ng-hide');
 	$scope.getAll = function() {
 		ShigotoData.getAllList().then(function(response){
@@ -65,13 +73,14 @@ app.controller('readData', ['$scope', '$http', 'ShigotoData', function($scope, $
 			console.log($scope.dataOfOne.dateApplied);
 			$http.post('editshigotoPost.php',{
 			'id' : $scope.dataOfOne.id,
+			'title' : $scope.dataOfOne.title,
 			'companyName' : $scope.dataOfOne.companyName,
 			'position' : $scope.dataOfOne.position,
 			'details' : $scope.dataOfOne.details,
 			'dateApplied' : $scope.dataOfOne.dateApplied,
 			'coverletter' : $scope.dataOfOne.coverletter,
 			'appliedLink' : $scope.dataOfOne.appliedLink,
-			'dateContaced' : $scope.dataOfOne.dateContaced,
+			'dateContacted' : $scope.dataOfOne.dateContacted,
 			'emailLink' : $scope.dataOfOne.emailLink,
 			'dateofInterview' : $scope.dataOfOne.dateofInterview,
 			'comment' : $scope.dataOfOne.comment
@@ -110,7 +119,8 @@ app.factory('ShigotoData', function($http) {
 		return $http.get("readShigotoPost.php").then(function(response){
 			var shigotos = response.data;
 			list = shigotos;
-			 console.log(list);
+			 // console.log(list);
+			 console.log(response);
 			return shigotos;
 		});
 	};
@@ -118,7 +128,7 @@ app.factory('ShigotoData', function($http) {
 	var getOneData = function(id) {
 		// console.log(typeof(id));
 		// console.log(list);
-
+		$("label").addClass("active");
 		getOneFromList();
 		// console.log(chosenOne);
 				console.log(selected);
@@ -151,7 +161,6 @@ app.controller('homeCtrl', ['$scope','loginService', function($scope,loginServic
 	$scope.txt='Page Home';
 
 	$scope.logout=function(){
-		$(".button-collapse").sideNav('hide');
 		loginService.logout();
 	}
 }])
@@ -159,8 +168,15 @@ app.controller('homeCtrl', ['$scope','loginService', function($scope,loginServic
 app.controller('loginCtrl', ['$scope', 'loginService', function($scope, loginService){
 	$scope.msgtxt='';
 	$('nav').addClass('ng-hide');
+	loginService.logout();
 	$scope.login=function(data){
 		loginService.login(data,$scope); //call login service
+	};
+}]);
+
+app.controller('registerCtrl', ['$scope', 'registerService', function($scope, registerService){
+	$scope.register = function(data) {
+		registerService.register(data, $scope);
 	};
 }]);
 
@@ -179,7 +195,7 @@ app.factory('loginService', function($http, $location, sessionService){
 				if(msg.data) {
 					console.log(msg.data[0]);
 					console.log(msg.data[1]);
-					$location.path('/home')
+					$location.path('/home');
 				} else {
 					console.log("SDSD");
 				}
@@ -187,6 +203,7 @@ app.factory('loginService', function($http, $location, sessionService){
 			});
 		},
 		logout:function(){
+			$(".button-collapse").sideNav('hide');
 			sessionService.destroy('uid');
 			$location.path('/login');
 		},
@@ -198,7 +215,29 @@ app.factory('loginService', function($http, $location, sessionService){
 			else return false;
 			*/
 		}
-	}
+	};
+});
+
+app.factory('registerService', function($http, $location){
+	return {
+		register:function(data, scope){
+			var post = $http.post('registerPost.php', data);
+			post.then(function(msg){
+				if (msg.data == "success") {
+					console.log(msg.data);
+					$location.path("/login");
+				} else {
+					console.log(msg.data);
+				}
+			});
+		}
+	};
+});
+
+app.factory('homeService', function($http, $location){
+	return {
+
+	};
 });
 
 app.factory('sessionService', ['$http', function($http){
@@ -214,10 +253,10 @@ app.factory('sessionService', ['$http', function($http){
 			return sessionStorage.removeItem(key);
 		}
 	};
-}])
+}]);
 
 app.run(function($rootScope, $location, loginService){
-	var routespermission=['/home', '/add', '', '/'];  //route that require login
+	var routespermission=['/home', '/add', '', '/', '/logout'];  //route that require login
 	$rootScope.$on('$routeChangeStart', function(){
 		if( routespermission.indexOf($location.path()) !=-1)
 		{

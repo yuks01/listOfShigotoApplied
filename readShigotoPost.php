@@ -5,13 +5,17 @@
 
     include_once 'config/database.php';
     include_once 'objects/readShigoto.php';
-
+    session_start();
     $database = new Database();
     $db = $database->getConnection();
 
     $readData = new ReadData($db);
 
-    $stmt = $readData->readAll();
+    $user = $_SESSION['user'];
+
+    // print $user;
+
+    $stmt = $readData->readAll($user);
     $num = $stmt->rowCount();
 
     $data = "";

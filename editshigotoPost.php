@@ -9,6 +9,7 @@
 	$data = json_decode(file_get_contents("php://input"));
 
 	$editShigoto->id = $data->id;
+	$editShigoto->title = $data->title;
 	$editShigoto->companyName = $data->companyName;
 	$editShigoto->position = $data->position;
 	$editShigoto->details = $data->details;

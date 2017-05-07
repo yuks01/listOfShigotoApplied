@@ -6,6 +6,7 @@ class EditShigoto{
 	private $table_name = "applied";
 
 	public $id;
+	public $title;
 	public $companyName;
 	public $position;
 	public $details;
@@ -24,12 +25,13 @@ class EditShigoto{
 	function edit(){
 		$this->id = (int)htmlspecialchars(strip_tags($this->id));
 
-		$query = "UPDATE " . $this->table_name . " SET companyName=:companyName, position=:position, details=:details, dateApplied=:dateApplied, coverletter=:coverletter, appliedLink=:appliedLink, dateContacted=:dateContacted, emailLink=:emailLink, dateofInterview=:dateofInterview, comment=:comment WHERE id = " . $this->id;
+		$query = "UPDATE " . $this->table_name . " SET title=:title, companyName=:companyName, position=:position, details=:details, dateApplied=:dateApplied, coverletter=:coverletter, appliedLink=:appliedLink, dateContacted=:dateContacted, emailLink=:emailLink, dateofInterview=:dateofInterview, comment=:comment WHERE id = " . $this->id;
 
 
 		$stmt = $this->conn->prepare($query);
 
 		echo '<script>console.log(' . $this->id . ')</script>';
+		$this->title = htmlspecialchars(strip_tags($this->title));
 		$this->companyName = htmlspecialchars(strip_tags($this->companyName));
 		$this->position = htmlspecialchars(strip_tags($this->position));
 		$this->details = htmlspecialchars(strip_tags($this->details));
@@ -41,6 +43,7 @@ class EditShigoto{
 		$this->dateofInterview = htmlspecialchars(strip_tags($this->dateofInterview));
 		$this->comment = htmlspecialchars(strip_tags($this->comment));
 
+		$stmt->bindParam(":title", $this->title);
 	    $stmt->bindParam(":companyName", $this->companyName);
 	    $stmt->bindParam(":position", $this->position);
 	    $stmt->bindParam(":details", $this->details);
