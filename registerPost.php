@@ -23,7 +23,8 @@
     $stmt = $conn->prepare($sql);
 
     $username = $data->username;
-    $password = $data->password;
+    $passwordNotHash = $data->password;
+    $password = password_hash($passwordNotHash, PASSWORD_DEFAULT);
     $name = $data->name;
     $email = $data->email;
 
