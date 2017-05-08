@@ -1,19 +1,18 @@
-
+<!-- 
 
 <div class="container">
 	    <div class="row">
 	        <div class="col s12">
 	            <h4>Shigoto Applied</h4>
 	            <div>
-				            <!-- used for searching the current list -->
-					<input type="text" ng-model="search" class="form-control" placeholder="Search product..." />
+
+					<input type="text" ng-model="search" class="form-control" placeholder="Search ..." />
 					 
-					<!-- table that shows product record list -->
+
 					<table class="hoverable bordered">
 					 
 					    <thead>
 					        <tr>
-					        	<th class="text-align-center">Title</th>
 					            <th class="text-align-center">Company Name</th>
 					            <th class="text-align-center">Position</th>
 					            <th class="text-align-center">Applied Link</th>
@@ -24,7 +23,6 @@
 					 
 					    <tbody ng-init="getAll()">
 					        <tr ng-repeat="shigoto in shigotos | filter: search | orderBy: 'id'">
-					            <td class="text-align-center">{{ shigoto.title }}</td>
 					            <td class="text-align-center">{{ shigoto.companyName }}</td>
 					            <td class="text-align-center">{{ shigoto.position }}</td>
 					            <td class="text-align-center">{{ shigoto.appliedLink}}</td>
@@ -38,82 +36,25 @@
 					    </tbody>
 					</table>
 				</div>
-	        </div> <!-- end col s12 -->
-	    </div> <!-- end row -->
-	</div> <!-- end container -->
+	        </div> 
+	    </div> 
+	</div> -->
+
+<div class="container" ng-init = "getAll()">
+<input type="text" ng-model="search" class="form-control" placeholder="Search ..." />
+	<div class="bordered hoverable list" ng-repeat = "shigoto in shigotos | filter: search | orderBy: 'id'">
+		<div class="divider"></div>
+			<div class="container list">
+				<p>Position: {{shigoto.position}}</p>
+				<p>Company Name: {{shigoto.companyName}}</p>
+				<p>Applied Link: {{shigoto.appliedLink}}</p>
+				<p>Date of Interview: {{shigoto.dateofInterview}}</p>
+				<p>Comment: {{shigoto.comment}}</p>
+
+				<a ng-href="#!/home/{{shigoto.id}}" class="waves-effect waves-light btn margin-bottom-1em">View</a>
+			</div>
+		<div class="divider"></div>
+	</div>
+</div>
 
 
-	<div id="edit" class="modal" >
-			    <div class="modal-content">
-			      <h4 id="modalTitle">Add</h4>
-					<div class="row">
-					    <form class="col s12">
-					      <div class="row">
-					      	<div class="input-field col s6">
-					          <input ng-model="dataOfOne.title" id="title" type="text" class="validate">
-					          <label for="title">Title</label>
-					        </div>
-					        <div class="input-field col s6">
-					          <input ng-model="dataOfOne.companyName" id="companyName" type="text" class="validate">
-					          <label for="companyName">Company Name</label>
-					        </div>
-					        <div class="input-field col s6">
-					          <input ng-model="dataOfOne.position" id="position" type="text" class="validate">
-					          <label for="position">Position</label>
-					        </div>
-					      </div>
-					      <div class="row">
-					        <div class="input-field col s12">
-					          <textarea ng-model="dataOfOne.details" id="details" class="materialize-textarea"></textarea>
-					          <label for="details">Details</label>
-					        </div>
-					      </div>
-					      <div class="row">
-					        <div class="input-field col s12">
-					          <input ng-model="dataOfOne.dateApplied" id="dateApplied" type="text" class="validate">
-					          <label for="dateApplied">Date Applied</label>
-					        </div>
-					      </div>
-					      <div class="row">
-					        <div class="input-field col s12">
-					          <textarea ng-model="dataOfOne.coverletter" id="coverletter" class="materialize-textarea"></textarea>
-					          <label for="coverletter">Cover Letter</label>
-					        </div>
-					      </div>
-					      <div class="row">
-					        <div class="input-field col s12">
-					          <input ng-model="dataOfOne.appliedLink" id="appliedLink" type="text" class="validate">
-					          <label for="appliedLink">Website Applied Link</label>
-					        </div>
-					      </div>
-					      <div class="row" id="dateContactedField">
-					        <div class="input-field col s12">
-					          <input ng-model="dataOfOne.dateContacted" id="dateContacted" type="text" class="validate">
-					          <label for="dateContacted">Date Contacted</label>
-					        </div>
-					      </div>
-					      <div class="row" id="emailLinkField">
-					        <div class="input-field col s12">
-					          <input ng-model="dataOfOne.emailLink" id="emailLink" type="text" class="validate">
-					          <label for="emailLink">Email Link</label>
-					        </div>
-					      </div>
-					      <div class="row" id="dateofInterviewField">
-					        <div class="input-field col s12">
-					          <input ng-model="dataOfOne.dateofInterview" id="dateofInterview" type="text" class="validate">
-					          <label for="dateofInterview">Date of Interview</label>
-					        </div>
-					      </div>
-					      <div class="row">
-					        <div class="input-field col s12">
-					          <textarea ng-model="dataOfOne.comment" id="comment" class="materialize-textarea"></textarea>
-					          <label for="comment">Comment</label>
-					        </div>
-					      </div>
-					    </form>
-					  </div>
-			    </div>
-			    <div class="modal-footer">
-			      <a id="addShigotoBtn" ng-click="editAppliedShigoto()" class=" modal-action modal-close waves-effect waves-teal btn-flat">Edit</a>
-			    </div>
-			  </div> <!-- end Add Shigoto Modal -->

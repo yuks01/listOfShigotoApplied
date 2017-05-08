@@ -6,7 +6,6 @@ class AddShigoto{
 	private $table_name = "applied";
 
 	public $id;
-	public $title;
 	public $companyName;
 	public $position;
 	public $details;
@@ -22,12 +21,11 @@ class AddShigoto{
 	}
 
 	function create(){
-		$query = "INSERT INTO " . $this->table_name . " SET title=:title, companyName=:companyName, position=:position, details=:details, dateApplied=:dateApplied, coverletter=:coverletter, appliedLink=:appliedLink, user=:user";
+		$query = "INSERT INTO " . $this->table_name . " SET companyName=:companyName, position=:position, details=:details, dateApplied=:dateApplied, coverletter=:coverletter, appliedLink=:appliedLink, user=:user";
 
 
 		$stmt = $this->conn->prepare($query);
 
-		$this->title = htmlspecialchars(strip_tags($this->title));
 		$this->companyName = htmlspecialchars(strip_tags($this->companyName));
 		$this->position = htmlspecialchars(strip_tags($this->position));
 		$this->details = htmlspecialchars(strip_tags($this->details));
@@ -36,7 +34,6 @@ class AddShigoto{
 		$this->appliedLink = htmlspecialchars(strip_tags($this->appliedLink));
 		$this->user = htmlspecialchars(strip_tags($this->user));
 
-		$stmt->bindParam(":title", $this->title);
 	    $stmt->bindParam(":companyName", $this->companyName);
 	    $stmt->bindParam(":position", $this->position);
 	    $stmt->bindParam(":details", $this->details);

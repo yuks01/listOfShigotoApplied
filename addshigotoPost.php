@@ -9,7 +9,7 @@
 	$data = json_decode(file_get_contents("php://input"));
 	$user = $_SESSION['user'];
 
-	$addShigoto->title = $data->title;
+
 	$addShigoto->companyName = $data->companyName;
 	$addShigoto->position = $data->position;
 	$addShigoto->details = $data->details;
