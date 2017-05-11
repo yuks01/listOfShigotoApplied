@@ -36,6 +36,7 @@ app.config(function($routeProvider, $locationProvider) {
 
 app.controller('AppliedShigotoCtrl', ['$scope', '$http', 'ShigotoData', function($scope, $http, ShigotoData){
 	//$scope.shigotoData = ShigotoData.modalAdd();
+	console.log("ASDASD");
 	$('#add').modal({complete: function() { $(".button-collapse").sideNav('hide'); window.location = "/shigoto/#!/home"; }});
 	$('#add').modal('open');
 
@@ -63,7 +64,12 @@ app.controller('readData', ['$scope', '$http', 'ShigotoData', 'homeService', fun
 	$(".button-collapse").sideNav('hide');
 	$scope.getAll = function() {
 		ShigotoData.getAllList().then(function(response){
+			
+			console.log(response);
+
 			$scope.shigotos = response;
+
+
 
 		});
 	};
@@ -72,6 +78,8 @@ app.controller('readData', ['$scope', '$http', 'ShigotoData', 'homeService', fun
 		console.log(id);
 
 	};
+
+	$scope.getAll();
 	// console.log($scope.editOne);
 }]);
 
@@ -181,7 +189,21 @@ app.factory('ShigotoData', function($http) {
 			var shigotos = response.data;
 			list = shigotos;
 			 // console.log(list);
-			 console.log(response);
+			 // console.log(response);
+
+			 function searchLatest(search){
+			 	
+			 	for (var i = 0; i < shigotos.length; i++) {
+			 		var count = 1;
+			 		while(shigotos[i][search + count] != ""){
+			 			count++;
+			 		}
+			 		shigotos[i]["latest" + search] = shigotos[i][search + (count - 1)];
+			 	}
+			 	
+			 }
+			 searchLatest("dateofInterview");
+			 searchLatest("dateContacted");
 			return shigotos;
 		});
 	};
@@ -227,7 +249,8 @@ app.controller('loginCtrl', ['$scope', 'loginService', function($scope, loginSer
 	loginService.logout();
 	$scope.login=function(data){
 		loginService.login(data,$scope); //call login service
-	};
+	};                    
+  
 }]);
 
 app.controller('registerCtrl', ['$scope', 'registerService', function($scope, registerService){
@@ -312,14 +335,27 @@ app.factory('sessionService', ['$http', function($http){
 }]);
 
 app.run(function($rootScope, $location, loginService){
-	var routespermission=['/home', '/add', '', '/', '/logout'];  //route that require login
+	var routespermission=['/home', '/add', '/logout'];  //route that require login
 	$rootScope.$on('$routeChangeStart', function(){
 
 		result = routespermission.filter(function(item){
-			return typeof item == 'string' && item.indexOf($location.path()) > -1;  
+			var location = $location.path();
+			var checkLocation = function (location) {
+				if(location.split("/").length - 1 > 1){
+
+					return location.substr(0,location.lastIndexOf('/'));
+				} else {
+					return location;
+				}
+			};
+			var checkedLocation = checkLocation(location);
+			
+			return typeof item == 'string' && item.indexOf(checkedLocation) > -1;  
 		});
 
-		if( result !=-1)
+		// console.log(result);
+
+		if( result != "")
 		{
 			var connected=loginService.islogged();
 			connected.then(function(msg){

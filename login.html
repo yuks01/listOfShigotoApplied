@@ -1,6 +1,10 @@
-<div class="valign-wrapper">
+<div class="centerThis">
 
-<form role="form" name="form1" class="center-align ">
+<div class="center">
+  <img class="loginImg responsive-img" src="images/login/login.png">
+</div>
+
+<form role="form" name="form1" class="center">
   <div class="input-field">
     <label for="exampleInputEmail1">Username</label>
     <input type="text"  class="form-control" ng-model="user.username" required>
@@ -10,11 +14,10 @@
     <input type="password" id="exampleInputPassword1" class="form-control" ng-model="user.password" required>
   </div>
   <button class="btn btn-default" type="submit" ng-click="login(user)" ng-disabled="form1.$invalid">Submit</button>
-  <p>{{msgtxt}}</p>
 </form>
 
 
-  <div class="container">
+
       <a href="#!register"><p>Register</p></a>
-  </div>
+
 </div>

@@ -40,7 +40,7 @@
 	    </div> 
 	</div> -->
 
-<div class="container" ng-init = "getAll()">
+<div class="container">
 <input type="text" ng-model="search" class="form-control" placeholder="Search ..." />
 	<div class="bordered hoverable list" ng-repeat = "shigoto in shigotos | filter: search | orderBy: 'id'">
 		<div class="divider"></div>
@@ -48,9 +48,9 @@
 				<p>Position: {{shigoto.position}}</p>
 				<p>Company Name: {{shigoto.companyName}}</p>
 				<p>Applied Link: {{shigoto.appliedLink}}</p>
-				<p>Date of Interview: {{shigoto.dateofInterview}}</p>
+				<p>Latest Date Contacted: {{shigoto.latestdateContacted}}</p>
+				<p>Latest Date of Interview: {{shigoto.latestdateofInterview}}</p>
 				<p>Comment: {{shigoto.comment}}</p>
-
 				<a ng-href="#!/home/{{shigoto.id}}" class="waves-effect waves-light btn margin-bottom-1em">View</a>
 			</div>
 		<div class="divider"></div>

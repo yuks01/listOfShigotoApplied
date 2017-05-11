@@ -1,5 +1,12 @@
-body {
+html, body, .holder, .centerThis {
 	height: 100%;
+}
+
+.centerThis {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .list {
@@ -8,4 +15,15 @@ body {
 
 .container {
 	word-wrap: break-word;
+}
+
+
+.back {
+	margin-top: 10px;
+}
+
+
+.loginImg {
+	max-width: 100px;
+	max-height: 100px;
 }
