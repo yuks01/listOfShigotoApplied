@@ -59,18 +59,13 @@ app.controller('AppliedShigotoCtrl', ['$scope', '$http', 'ShigotoData', function
 }]);
 
 
-app.controller('readData', ['$scope', '$http', 'ShigotoData', 'homeService', function($scope, $http, ShigotoData,homeService){
+app.controller('readData', ['$scope', '$http', 'ShigotoData', 'loginService', function($scope, $http, ShigotoData, loginService){
 	$('nav').removeClass('ng-hide');
 	$(".button-collapse").sideNav('hide');
 	$scope.getAll = function() {
 		ShigotoData.getAllList().then(function(response){
-			
 			console.log(response);
-
 			$scope.shigotos = response;
-
-
-
 		});
 	};
 	
@@ -78,8 +73,9 @@ app.controller('readData', ['$scope', '$http', 'ShigotoData', 'homeService', fun
 		console.log(id);
 
 	};
-
+	if(loginService.islogged()){
 	$scope.getAll();
+	loginService.getUser()}
 	// console.log($scope.editOne);
 }]);
 
@@ -232,7 +228,15 @@ app.factory('ShigotoData', function($http) {
 });
 
 app.controller('homeCtrl', ['$scope','loginService', function($scope,loginService){
-	$scope.txt='Page Home';
+	// var getUserName= function(){
+	// 	loginService.getUser().then(function(user){
+	// 		user = user.substring(1,user.length-1);
+	// 		$scope.userName = user;
+	// 		console.log(user);
+	// 	});
+	// 	// console.log(loginService.getUser());
+	// 	// console.log($scope.userName);
+	// };
 	
 	$scope.logout=function(){
 		loginService.logout();
@@ -241,7 +245,9 @@ app.controller('homeCtrl', ['$scope','loginService', function($scope,loginServic
 		$(".button-collapse").sideNav('hide');
 		window.location = "/shigoto/#!/home";
 	};
-}])
+	if (loginService.islogged()) {loginService.getUser();}
+	
+}]);
 
 app.controller('loginCtrl', ['$scope', 'loginService', function($scope, loginService){
 	$scope.msgtxt='';
@@ -293,6 +299,15 @@ app.factory('loginService', function($http, $location, sessionService){
 			if(sessionService.get('user')) return true;
 			else return false;
 			*/
+		},
+		getUser:function(){
+			var getLoggedUser=$http.get('getLoggedUser.php');
+			var user = getLoggedUser.then(function(response){
+				console.log(response.data);
+				 $('#userNameHere').text(response.data.substring(1, response.data.length-1));
+			});
+			// user = function(){return user.substring(1,user.length-1)};
+			// $('#userNameHere').value(user);
 		}
 	};
 });

@@ -31,9 +31,10 @@
         
         // print $row["username"];
         
-        session_start();
+        
         $user = $row;
         if(password_verify($data->password, $user["password"])){
+            session_start();
             // print $user["username"];
             $_SESSION['user']=$user["username"];
             // print $_SESSION['user'];

@@ -27,3 +27,15 @@ html, body, .holder, .centerThis {
 	max-width: 100px;
 	max-height: 100px;
 }
+
+#h3Title {
+	font-family: impact;
+}
+
+nav{
+	font-family: cursive;
+}
+
+.viewButton{
+	margin: 5px;
+}
