@@ -50,7 +50,7 @@ app.controller('AppliedShigotoCtrl', ['$scope', '$http', 'ShigotoData', function
 		'appliedLink' : $scope.appliedLink
 		}).then(function (data, status, headers, config){
 			console.log(data);
-			Materialize.toast(data, 4000);
+			Materialize.toast(data.data, 4000);
 			// $('AppliedModal').modal('close');
 
 		});	
@@ -165,7 +165,7 @@ app.factory('ShigotoData', function($http) {
 			'comment' : data.comment
 			}).then(function (data, status, headers, config){
 				console.log(data);
-				Materialize.toast(data, 4000);
+				Materialize.toast(data.data, 4000);
 				// $('AppliedModal').modal('close');
 
 			});	
@@ -282,7 +282,7 @@ app.factory('loginService', function($http, $location, sessionService){
 					console.log(msg.data[1]);
 					$location.path('/home');
 				} else {
-					console.log("SDSD");
+					alert('Wrong username or password');
 				}
 				
 			});
@@ -321,7 +321,7 @@ app.factory('registerService', function($http, $location){
 					console.log(msg.data);
 					$location.path("/login");
 				} else {
-					console.log(msg.data);
+					alert('User already registered');
 				}
 			});
 		}

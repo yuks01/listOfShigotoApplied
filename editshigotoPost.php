@@ -33,10 +33,10 @@
 	$editShigoto->comment = $data->comment;
 	echo '<script>console.log(' . $data->id . ')</script>';;
 	if($editShigoto->edit()){
-		echo "Product was edited.";
+		echo "Shigoto was edited.";
 	}
 
 	else {
-		echo "Unable to edit product.";
+		echo "Unable to edit shigoto.";
 	}
 ?>

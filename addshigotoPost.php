@@ -21,10 +21,10 @@
 	// print $addShigoto->user;
 
 	if($addShigoto->create()){
-		echo "Product was created.";
+		echo "Shigoto was added.";
 	}
 
 	else {
-		echo "Unable to create product.";
+		echo "Unable to add shigoto.";
 	}
 ?>

@@ -11,6 +11,7 @@
     $password = "mysql"; 
     $tablename = "user";
 
+
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if($conn->connect_error){
@@ -27,12 +28,13 @@
         
 
 
-        $row = $result->fetch_array(MYSQL_ASSOC);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
         
         // print $row["username"];
         
         
         $user = $row;
+        // print_r($user);
         if(password_verify($data->password, $user["password"])){
             session_start();
             // print $user["username"];
