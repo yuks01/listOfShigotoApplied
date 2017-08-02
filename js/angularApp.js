@@ -39,7 +39,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 app.controller('AppliedShigotoCtrl', ['$scope', '$http', 'ShigotoData', function($scope, $http, ShigotoData){
 	//$scope.shigotoData = ShigotoData.modalAdd();
 	console.log("ASDASD");
-	$('#add').modal({complete: function() { $(".button-collapse").sideNav('hide'); window.location = "/shigoto/#!/home"; }});
+	$('#add').modal({complete: function() { $(".button-collapse").sideNav('hide'); window.location = "home"; }});
 	$('#add').modal('open');
 
 	$scope.addAppliedShigoto = function(){
@@ -113,7 +113,7 @@ app.controller('viewShigotoCtrl', ['$scope', 'ShigotoData', '$routeParams', func
 		$scope.deleteAppliedShigoto = function(){
 			console.log(id);
 			ShigotoData.deleteShigoto(id).then(function(){
-				window.location = "/shigoto/#!/home";
+				window.location = "home";
 			});
 
 		};
@@ -245,7 +245,7 @@ app.controller('homeCtrl', ['$scope','loginService', function($scope,loginServic
 	}
 	$scope.goHome = function(){
 		$(".button-collapse").sideNav('hide');
-		window.location = "/shigoto/#!/home";
+		window.location = "home";
 	};
 	if (loginService.islogged()) {loginService.getUser();}
 	
@@ -268,7 +268,7 @@ app.controller('registerCtrl', ['$scope', 'registerService', function($scope, re
 }]);
 
 
-app.factory('loginService', function($http, $location, sessionService){
+app.factory('loginService', ['$http', '$location', 'sessionService', function($http, $location, sessionService){
 	return {
 		login: function(data, scope){
 			var $promise = $http.post('loginPost.php', data);
@@ -312,23 +312,23 @@ app.factory('loginService', function($http, $location, sessionService){
 			// $('#userNameHere').value(user);
 		}
 	};
-});
+}]);
 
-app.factory('registerService', function($http, $location){
+app.factory('registerService', ['$http', '$location', function($http, $location){
 	return {
 		register:function(data, scope){
 			var post = $http.post('registerPost.php', data);
 			post.then(function(msg){
 				if (msg.data == "success") {
 					console.log(msg.data);
-					$location.path("/login");
+					$location.path("login");
 				} else {
 					alert('User already registered');
 				}
 			});
 		}
 	};
-});
+}]);
 
 app.factory('homeService', function($http, $location){
 	return {

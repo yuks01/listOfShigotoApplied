@@ -5,19 +5,10 @@
 
     $data = json_decode(file_get_contents("php://input"));
     print $data->id;
-    $servername = "localhost"; 
-    $dbname = "ShigotoApplied"; 
-    $username = "root"; 
-    $password = "mysql"; 
+    include_once 'config/db.php';
+    $database = new Database();
+    $conn = $database->getConnection();
     $tablename = "applied";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if($conn->connect_error){
-        die("connection error: " . $conn->connect_error);
-    }
-
-
 
     $sql = "SELECT * FROM " . $tablename . " WHERE id = '" . $data . "'";
     $result = $conn->query($sql);

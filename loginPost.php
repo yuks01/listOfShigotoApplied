@@ -5,14 +5,13 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $servername = "localhost"; 
-    $dbname = "ShigotoApplied"; 
-    $username = "root"; 
-    $password = "mysql"; 
+    include_once 'config/db.php';
+    $database = new Database();
+    $conn = $database->getConnection();
+
     $tablename = "user";
 
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
     if($conn->connect_error){
         die("connection error: " . $conn->connect_error);

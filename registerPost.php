@@ -5,20 +5,11 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $servername = "localhost"; 
-    $dbname = "ShigotoApplied"; 
-    $dbusername = "root"; 
-    $dbpassword = "mysql"; 
+    include_once 'config/db.php';
+    $database = new Database();
+    $conn = $database->getConnection();
     $tablename = "user";
 
-    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-    if($conn->connect_error){
-        die("connection error: " . $conn->connect_error);
-    }
-
-
-    
     $sql = "INSERT INTO " . $tablename . " (username, password, name, email) VALUES(?,?,?,?)";
     $stmt = $conn->prepare($sql);
 
