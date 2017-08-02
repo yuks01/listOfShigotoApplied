@@ -5,26 +5,26 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	$locationProvider.hashPrefix('!');
 	$routeProvider
 		.when ('/home', {
-			templateUrl: 'listShigoto.html',
+			templateUrl: 'views/listShigoto.html',
 			controller: 'readData'
 		})
 		.when ('/login', {
-			templateUrl: 'login.html',
+			templateUrl: 'views/login.html',
 			controller: 'loginCtrl'
 		})
 		.when ('/add', {
-			templateUrl: 'addShigoto.html',
+			templateUrl: 'views/addShigoto.html',
 			controller: 'AppliedShigotoCtrl'
 		})
 		.when ('/register', {
-			templateUrl: 'register.html',
+			templateUrl: 'views/register.html',
 			controller: 'registerCtrl'
 		})
 		.when ('/home/:id', {
-			templateUrl: 'viewShigoto.html',
+			templateUrl: 'views/viewShigoto.html',
 			controller: 'viewShigotoCtrl'
 		})
-		.when ('/logout', {
+		.when ('/logout', {	
 			controller: 'loginCtrl'
 		})
 		.otherwise({redirectTo:'/home'});
