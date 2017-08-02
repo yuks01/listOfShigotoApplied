@@ -1,6 +1,8 @@
 var app = angular.module('myApp', ['ngRoute']);
 
-app.config(function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
 	$routeProvider
 		.when ('/home', {
 			templateUrl: 'listShigoto.html',
@@ -26,7 +28,7 @@ app.config(function($routeProvider, $locationProvider) {
 			controller: 'loginCtrl'
 		})
 		.otherwise({redirectTo:'/home'});
-});
+}]);
 
 
 
